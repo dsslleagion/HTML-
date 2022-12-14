@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso HTML5</title>
+</head>
+<body>
+    <h3>Curso After Effects Css: R$ 109,00</h3>
+    <form name="formulario_vendas" method="get" action="">
+        <label>Quantidade:<input type="text" name="qtde"></label>
+        <p>Valor Total: R$ <output name="vtotal"> </p>
+    </form>
+
+    <script type="text/javascript">
+        function calculaValorTotal (){
+            var qtdeItens = document.forms['formulario_vendas']['qtde'].value;
+            var valorTotal = (qtdeItens * 109).toFixed(2);
+            document.forms['formulario_vendas']['vtotal'].value = valorTotal;
+        }
+        window.onload = function(){
+            document.forms['formulario_vendas']['qtde'].onblur = calculaValorTotal;
+        }
+    </script>
+</body>
+</html>

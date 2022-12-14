@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso HTML5</title>
+</head>
+<body>
+
+    <script>
+        function pegarPosicao(){
+            if(navigator.geolocation){
+                navigator.geolocation.getCurrentPosition(sucesso);
+            }else{
+                alert('Sinto Muito! seu navegador não suporta funções de geolocalização');
+            }
+            function sucesso(position){
+                var latitude = position.coords.latitude;
+                var longitude = position.coords.longitude;
+
+                var mensagem = 'As suas cordenadas são: <br>';
+                mensagem += 'latitude: ' + latitude + '<br>';
+                mensagem += "longitude: " + longitude ;
+                document.getElementById("msg").innerHTML = mensagem;
+            }
+        }
+    </script>
+
+   <p> <input type="button" value="Clique para pegar a posição" onClick="pegarPosicao()"></p>
+   <p id="msg" class="formata_posicao"></p>
+    
+</body>
+</html>

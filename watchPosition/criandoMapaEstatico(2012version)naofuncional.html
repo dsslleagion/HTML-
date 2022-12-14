@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso HTML 5</title>
+</head>
+<body>
+
+    <style>
+        #mapa {
+            width: 600px;
+            height: 420px;
+            display:none;
+        }
+    </style>
+    <script>
+        function mostrarMapa(){
+            if(navigator.geolocation){
+                navigator.geolocation.getCurrentPosition(sucesso,erro);
+            }else{
+                alert("Este Navegador não suporta a funcionalidade Geolocalization");
+            }
+        }
+        function erro(err){
+            switch(err.code) {
+                case 1 :
+                    var mensagemErro = "Permissão Negada.";
+                break;
+                case 2:
+                    var mensagemErro = "Não foi possivel estabelecer Conexão.";
+                break;
+                case 3:
+                    var mensagemErro = "tempo esgotado";
+                break;
+                default:
+                    var mensagemErro = "não foi possivel obter a sua posição.";
+            }
+            var codigoErro = err.code;
+            var mensagem ="Ocorreu um erro na determinação da posição: <br>";
+            mensagem += "Código do erro: " + codigoErro + "<br>";
+            mensagem += "Mensagem:" + mensagemErro;
+            document.getElementById("msg").innerHTML = mensagem;
+        }
+        function sucesso(position){
+            var mapa = document.getElementById("mapa");
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+            var url = "http:/maps.google.com/maps/api/staticmap?center=";
+            url += latitude +","+ longitude;
+            url += "&zoom=154size=400x400";
+            url += "&markers=color:red|"+latitude +","+longitude;
+            url += "&sensor=true"
+            mapa.style.display ="block";
+        }
+    </script>
+    
+    <div id="tudo">
+        <header>
+            <h1>Exemplo Mapa Dinâmico</h1>
+        </header>
+    </div>
+    <section>
+        <p><input type=button value='Clique para mostrar sua posição' onclick="mostrarMapa()"></p>
+    </section>
+    <section>
+        <div id="mapa"></div>
+    </section>
+    
+</body>
+</html>
